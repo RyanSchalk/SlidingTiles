@@ -31,7 +31,9 @@ struct GameView: View {
                         }
                     }()
                     
-                    model.slide(direction)
+                    withAnimation(.linear(duration: 0.2)) {
+                        model.slide(direction)
+                    }
                 })
         }
     }
