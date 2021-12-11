@@ -11,7 +11,8 @@ import SwiftUI
 struct SlidingTilesApp: App {
     var body: some Scene {
         WindowGroup {
-            EmptyView()
+            BoardView()
+                .padding()
         }
     }
 }

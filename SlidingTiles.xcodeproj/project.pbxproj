@@ -11,6 +11,7 @@
 		9481ED312767F6BA00FFCD93 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9481ED302767F6BA00FFCD93 /* Assets.xcassets */; };
 		9481ED342767F6BA00FFCD93 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9481ED332767F6BA00FFCD93 /* Preview Assets.xcassets */; };
 		9481ED3B2767FD3C00FFCD93 /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9481ED3A2767FD3C00FFCD93 /* TileView.swift */; };
+		9481ED3D2767FEEF00FFCD93 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9481ED3C2767FEEF00FFCD93 /* BoardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		9481ED302767F6BA00FFCD93 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9481ED332767F6BA00FFCD93 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9481ED3A2767FD3C00FFCD93 /* TileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
+		9481ED3C2767FEEF00FFCD93 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,7 @@
 		9481ED2B2767F6B900FFCD93 /* SlidingTiles */ = {
 			isa = PBXGroup;
 			children = (
+				9481ED3C2767FEEF00FFCD93 /* BoardView.swift */,
 				9481ED2C2767F6B900FFCD93 /* SlidingTilesApp.swift */,
 				9481ED3A2767FD3C00FFCD93 /* TileView.swift */,
 				9481ED302767F6BA00FFCD93 /* Assets.xcassets */,
@@ -137,6 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9481ED3D2767FEEF00FFCD93 /* BoardView.swift in Sources */,
 				9481ED3B2767FD3C00FFCD93 /* TileView.swift in Sources */,
 				9481ED2D2767F6B900FFCD93 /* SlidingTilesApp.swift in Sources */,
 			);
