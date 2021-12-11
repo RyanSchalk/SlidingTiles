@@ -9,6 +9,19 @@ import Foundation
 
 enum Direction {
     case up, down, left, right
+    
+    var opposite: Direction {
+        switch self {
+        case .up:
+            return .down
+        case .down:
+            return .up
+        case .left:
+            return .right
+        case .right:
+            return .left
+        }
+    }
 }
 
 /// The gameboard is an NxN grid. This constant specifies N.
@@ -23,6 +36,8 @@ let BOARD_DIMENSION = 3
 class GameModel: ObservableObject {
     /// A 2D array where indexing by column, then row gives the object at that space on the gameboard. Each space is either nil (empty) or contains a number.
     @Published var board: [[Int?]]
+    
+    private var emptyPosition: (Int, Int)
     
     init () {
         var positions: [(Int, Int)] = []
@@ -39,22 +54,48 @@ class GameModel: ObservableObject {
             count: BOARD_DIMENSION
         )
         
+        self.emptyPosition = (BOARD_DIMENSION - 1, BOARD_DIMENSION - 1)
+        
         zip(shuffledTileNumbers, positions).forEach { number, position in
             self.board[position.0][position.1] = number
         }
     }
     
+    /// If possible, moves a tile on the board into the empty space by sliding the tile in the given direction.
     func slide(_ direction: Direction) {
-        // TODO: implement logic to update the board.
-        print("Sliding \(direction)!")
+        guard let tilePosition = getNeighbor(of: emptyPosition, inDirection: direction.opposite) else { return }
+        guard let tileNumber = self.board[tilePosition.0][tilePosition.1] else { return }
         
-        // Find the tile that can fill the empty space by sliding in the given direction.
-        // If no such tile exists, return.
+        var newBoard = self.board
         
-        // Copy the board.
+        newBoard[emptyPosition.0][emptyPosition.1] = tileNumber
+        newBoard[tilePosition.0][tilePosition.1] = nil
+        self.emptyPosition = tilePosition
         
-        // In the copy of the board, put the tile in the empty space, and put the empty space where the tile was.
+        self.board = newBoard
+    }
+    
+    /// Given a position on the board, returns the immediate neighbor, if it exists, in the given direction.
+    private func getNeighbor(of position: (Int, Int), inDirection direction: Direction) -> (Int, Int)? {
+        var neighborColumn = position.0
+        var neighborRow = position.1
         
-        // Set self.board to the copy of the board, which will update the view.
+        switch direction {
+        case .up:
+            neighborRow -= 1
+        case .down:
+            neighborRow += 1
+        case .left:
+            neighborColumn -= 1
+        case .right:
+            neighborColumn += 1
+        }
+        
+        guard neighborColumn >= 0, neighborColumn < BOARD_DIMENSION,
+              neighborRow >= 0, neighborRow < BOARD_DIMENSION else {
+                  return nil
+              }
+        
+        return (neighborColumn, neighborRow)
     }
 }
