@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum Direction {
+    case up, down, left, right
+}
+
 /// The gameboard is an NxN grid. This constant specifies N.
 let BOARD_DIMENSION = 3
 
@@ -38,5 +42,10 @@ class GameModel: ObservableObject {
         zip(shuffledTileNumbers, positions).forEach { number, position in
             self.board[position.0][position.1] = number
         }
+    }
+    
+    func slide(_ direction: Direction) {
+        // TODO: implement logic to update the board.
+        print("Sliding \(direction)!")
     }
 }

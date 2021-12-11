@@ -19,6 +19,20 @@ struct GameView: View {
                 .frame(maxWidth: .infinity)
                 .aspectRatio(1, contentMode: .fit)
                 .padding()
+                .gesture(DragGesture(minimumDistance: 20, coordinateSpace: .global).onEnded { value in
+                    let horizontalAmount = value.translation.width as CGFloat
+                    let verticalAmount = value.translation.height as CGFloat
+                    
+                    let direction: Direction = {
+                        if abs(horizontalAmount) > abs(verticalAmount) {
+                            return horizontalAmount < 0 ? .left : .right
+                        } else {
+                            return verticalAmount < 0 ? .up : .down
+                        }
+                    }()
+                    
+                    model.slide(direction)
+                })
         }
     }
 }
