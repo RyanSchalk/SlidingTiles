@@ -29,13 +29,14 @@ let BOARD_DIMENSION = 3
 
 /**
  When instantiated, loads the initial game state. Models the state of the game as the player moves tiles.
- This includes the board, and will include the number of moves used and whether the player has won.
- 
  When initialized, the numbers on the board are randomly shuffled. Note that this may produce an unsolvable puzzle.
  */
 class GameModel: ObservableObject {
     /// A 2D array where indexing by column, then row gives the object at that space on the gameboard. Each space is either nil (empty) or contains a number.
     @Published var board: [[Int?]]
+    
+    @Published var movesUsed = 0
+    @Published var hasWon = false
     
     private var emptyPosition: (Int, Int)
     
@@ -73,6 +74,9 @@ class GameModel: ObservableObject {
         self.emptyPosition = tilePosition
         
         self.board = newBoard
+        
+        self.movesUsed += 1
+        self.hasWon = checkForWin()
     }
     
     /// Given a position on the board, returns the immediate neighbor, if it exists, in the given direction.
@@ -97,5 +101,23 @@ class GameModel: ObservableObject {
               }
         
         return (neighborColumn, neighborRow)
+    }
+    
+    /// Returns true if the numbers on the gameboard are in order and the empty space is in the bottom-right corner.
+    private func checkForWin() -> Bool {
+        let bottomRightPosition = (BOARD_DIMENSION - 1, BOARD_DIMENSION - 1)
+        guard self.board[bottomRightPosition.0][bottomRightPosition.1] == nil else { return false }
+        
+        var numbers: [Int] = []
+        
+        for row in 0..<BOARD_DIMENSION {
+            for column in 0..<BOARD_DIMENSION {
+                guard let number = self.board[column][row] else { continue }
+                numbers.append(number)
+            }
+        }
+        
+        let sortedNumbers = numbers.sorted()
+        return numbers.elementsEqual(sortedNumbers)
     }
 }
