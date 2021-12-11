@@ -7,9 +7,6 @@
 
 import SwiftUI
 
-/// The gameboard is an NxN grid. This constant specifies N.
-private let BOARD_DIMENSION = 3
-
 /// The number of points between grid spaces on the gameboard.
 private let BOARD_SPACING: CGFloat = 2
 
@@ -25,18 +22,7 @@ private func getOffsetFor(column: Int, row: Int, size: CGFloat) -> CGSize {
  The gameboard grid. Contains the numbered tiles that the player moves around.
  */
 struct BoardView: View {
-    private let board: [[Int?]] = {
-        var board: [[Int?]] = Array(
-            repeating: Array(repeating: nil, count: BOARD_DIMENSION),
-            count: BOARD_DIMENSION
-        )
-        
-        board[0][0] = 1
-        board[1][0] = 2
-        board[1][1] = 5
-        
-        return board
-    }()
+    let board: [[Int?]]
     
     var body: some View {
         let tileNumbersAndPositions: [(Int, Int, Int)] = {
@@ -88,6 +74,17 @@ struct BoardView: View {
 
 struct BoardView_Previews: PreviewProvider {
     static var previews: some View {
-        BoardView()
+        BoardView(board: {
+            var board: [[Int?]] = Array(
+                repeating: Array(repeating: nil, count: BOARD_DIMENSION),
+                count: BOARD_DIMENSION
+            )
+            
+            board[0][0] = 1
+            board[1][0] = 2
+            board[1][1] = 5
+            
+            return board
+        }())
     }
 }
