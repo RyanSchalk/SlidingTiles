@@ -47,5 +47,14 @@ class GameModel: ObservableObject {
     func slide(_ direction: Direction) {
         // TODO: implement logic to update the board.
         print("Sliding \(direction)!")
+        
+        // Find the tile that can fill the empty space by sliding in the given direction.
+        // If no such tile exists, return.
+        
+        // Copy the board.
+        
+        // In the copy of the board, put the tile in the empty space, and put the empty space where the tile was.
+        
+        // Set self.board to the copy of the board, which will update the view.
     }
 }
